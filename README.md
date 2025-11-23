@@ -6,7 +6,6 @@
 
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Maven](https://img.shields.io/badge/Maven-3.8+-blue.svg)](https://maven.apache.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![FlatLaf](https://img.shields.io/badge/UI-FlatLaf-brightgreen.svg)](https://www.formdev.com/flatlaf/)
 
 *Smart music playback with audio fingerprinting, intelligent recommendations, and real-time visualization*
@@ -58,12 +57,6 @@
 - **Responsive Design**: Smooth animations and transitions
 - **Intuitive Navigation**: Easy-to-use sidebar navigation
 - **Album Art Display**: Beautiful album artwork integration
-
----
-
-## 🖼️ Screenshots
-
-> **Note**: Add screenshots of your application here to showcase the UI
 
 ---
 
@@ -216,21 +209,11 @@ sonora-music-player/
 │       └── resources/
 │           ├── vlc/                            # VLC native libraries
 │           └── icons/                          # Application icons
-├── target/                                     # Build output
-├── data/                                       # Database files
-├── pom.xml                                     # Maven configuration
-└── README.md
 ```
 
 ---
 
 ## 🎯 Usage Guide
-
-### Adding Music to Library
-1. Click **"Library"** in the sidebar
-2. Click **"Add Folder"** or **"Add Files"**
-3. Select your music files or folders
-4. The app will automatically scan and add tracks
 
 ### Identifying Unknown Songs
 1. Navigate to **"Identify Song"** panel
@@ -286,12 +269,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
