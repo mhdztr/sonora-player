@@ -28,7 +28,6 @@
 - **Spotify & Apple Music**: Direct links to streaming platforms
 
 ### 🤖 **Smart Recommendations**
-- **AI-Powered Suggestions**: Intelligent track recommendations based on listening history
 - **Daily Mix**: Personalized playlists generated from your preferences
 - **Genre & Artist Analysis**: Discover new music similar to your favorites
 - **Collaborative Filtering**: Apache Mahout-based recommendation engine
