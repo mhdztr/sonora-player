@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class LyricsService {
 
-    private static final String API_BASE_URL = "https://api.lyrics.ovh/v1";
+    private static final String API_BASE_URL = "https://api.lyrics.ovh/v1"; // kalau besok masih down nih api, kita pakai genius di sraping html
 
     // Fetch lyrics untuk lagu berdasarkan artist dan title
     public String fetchLyrics(String artist, String title) {
