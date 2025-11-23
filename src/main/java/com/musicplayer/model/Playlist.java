@@ -11,9 +11,8 @@ public class Playlist {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<Track> tracks;
-    private String coverImageUrl; // Optional: URL for playlist cover
-
-    // Constructors
+    private String coverImageUrl; 
+    
     public Playlist() {
         this.tracks = new ArrayList<>();
         this.createdAt = LocalDateTime.now();

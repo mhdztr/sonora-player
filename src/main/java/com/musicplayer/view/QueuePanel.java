@@ -13,7 +13,6 @@ import java.util.List;
 public class QueuePanel extends JPanel {
     private MusicPlayerController controller;
 
-    // UI Components
     private JTable queueTable;
     private DefaultTableModel tableModel;
     private JLabel queueInfoLabel;
@@ -36,15 +35,12 @@ public class QueuePanel extends JPanel {
         setBackground(new Color(18, 18, 20));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Top panel - Header & controls
         JPanel topPanel = createTopPanel();
         add(topPanel, BorderLayout.NORTH);
 
-        // Center panel - Queue table
         JPanel centerPanel = createCenterPanel();
         add(centerPanel, BorderLayout.CENTER);
 
-        // Bottom panel - Actions
         JPanel bottomPanel = createBottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
     }
@@ -53,12 +49,10 @@ public class QueuePanel extends JPanel {
         JPanel panel = new JPanel(new MigLayout("fillx", "[]push[]", ""));
         panel.setOpaque(false);
 
-        // Title
         JLabel titleLabel = new JLabel("PLAY QUEUE");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
 
-        // Queue info
         queueInfoLabel = new JLabel("0 tracks in queue");
         queueInfoLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         queueInfoLabel.setForeground(new Color(150, 150, 150));
@@ -73,7 +67,6 @@ public class QueuePanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setOpaque(false);
 
-        // Table model
         String[] columnNames = { "#", "Title", "Artist", "Album", "Duration" };
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -82,7 +75,7 @@ public class QueuePanel extends JPanel {
             }
         };
 
-        // Table
+        // table
         queueTable = new JTable(tableModel);
         queueTable.setBackground(new Color(30, 30, 35));
         queueTable.setForeground(Color.WHITE);
@@ -106,25 +99,22 @@ public class QueuePanel extends JPanel {
 
                 int currentIndex = controller.getCurrentQueueIndex();
 
-                // Current playing track - different style
                 if (row == currentIndex) {
                     if (isSelected) {
-                        // Selected + Current = Purple/Blue blend
                         c.setBackground(new Color(80, 100, 150));
                     } else {
-                        // Current but not selected = Green highlight
                         c.setBackground(new Color(50, 100, 80));
                     }
                     c.setForeground(Color.WHITE);
                     setFont(getFont().deriveFont(Font.BOLD));
                 }
-                // Selected (not current)
+
                 else if (isSelected) {
                     c.setBackground(new Color(60, 60, 70));
                     c.setForeground(Color.WHITE);
                     setFont(getFont().deriveFont(Font.PLAIN));
                 }
-                // Normal
+
                 else {
                     c.setBackground(new Color(30, 30, 35));
                     c.setForeground(Color.WHITE);
@@ -135,7 +125,6 @@ public class QueuePanel extends JPanel {
             }
         });
 
-        // Column widths
         TableColumn col0 = queueTable.getColumnModel().getColumn(0);
         col0.setPreferredWidth(40);
         col0.setMaxWidth(50);
@@ -144,7 +133,7 @@ public class QueuePanel extends JPanel {
         col4.setPreferredWidth(80);
         col4.setMaxWidth(100);
 
-        // Double-click to play
+        // double-click to play
         queueTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
@@ -153,7 +142,7 @@ public class QueuePanel extends JPanel {
             }
         });
 
-        // Scroll pane
+        // scroll
         JScrollPane scrollPane = new JScrollPane(queueTable);
         scrollPane.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 55)));
         scrollPane.getViewport().setBackground(new Color(30, 30, 35));
@@ -167,28 +156,28 @@ public class QueuePanel extends JPanel {
         JPanel panel = new JPanel(new MigLayout("fillx", "[]10[]push[]10[]10[]", ""));
         panel.setOpaque(false);
 
-        // Remove selected button
+        // remove selected button
         removeSelectedButton = new JButton("Remove Selected");
         removeSelectedButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         removeSelectedButton.setFocusPainted(false);
         removeSelectedButton.addActionListener(e -> removeSelected());
         styleButton(removeSelectedButton);
 
-        // Clear queue button
+        // clear queue button
         clearQueueButton = new JButton("Clear Queue");
         clearQueueButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         clearQueueButton.setFocusPainted(false);
         clearQueueButton.addActionListener(e -> clearQueue());
         styleButton(clearQueueButton);
 
-        // Move up button
+        // move up button
         moveUpButton = new JButton(" Move Up");
         moveUpButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         moveUpButton.setFocusPainted(false);
         moveUpButton.addActionListener(e -> moveUp());
         styleButton(moveUpButton);
 
-        // Move down button
+        // move down button
         moveDownButton = new JButton(" Move Down");
         moveDownButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         moveDownButton.setFocusPainted(false);
@@ -230,16 +219,13 @@ public class QueuePanel extends JPanel {
         List<Track> queue = controller.getQueue();
         int currentIndex = controller.getCurrentQueueIndex();
 
-        // Update info label
+        // update info label
         queueInfoLabel.setText(queue.size() + " track" + (queue.size() != 1 ? "s" : "") + " in queue");
 
-        // Save current selection
         int selectedRow = queueTable.getSelectedRow();
 
-        // Clear table
         tableModel.setRowCount(0);
 
-        // Populate table
         for (int i = 0; i < queue.size(); i++) {
             Track track = queue.get(i);
 
@@ -254,12 +240,11 @@ public class QueuePanel extends JPanel {
             tableModel.addRow(rowData);
         }
 
-        // RESTORE USER SELECTION
         if (selectedRow >= 0 && selectedRow < queue.size()) {
             queueTable.setRowSelectionInterval(selectedRow, selectedRow);
         }
 
-        // Auto-scroll to ke current track (Cuma firs open sih)
+        // Auto-scroll ke current track (Cuma firs open sih)
         if (!hasScrolledToCurrentTrack && currentIndex >= 0 && currentIndex < queue.size()) {
             queueTable.scrollRectToVisible(queueTable.getCellRect(currentIndex, 0, true));
             hasScrolledToCurrentTrack = true;
@@ -314,7 +299,7 @@ public class QueuePanel extends JPanel {
 
         Track track = queue.get(selectedRow);
 
-        // Confirm removal
+        // Confirm hapus
         int result = JOptionPane.showConfirmDialog(this,
                 "Remove \"" + track.getTitle() + "\" from queue?",
                 "Remove from Queue",

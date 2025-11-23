@@ -61,6 +61,8 @@ public class EqualizerPanel extends JPanel {
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         
         add(scrollPane, BorderLayout.CENTER);
+        
+        toggleEqualizer();
     }
     
     private JPanel createEqualizerSection() {
@@ -90,7 +92,7 @@ public class EqualizerPanel extends JPanel {
             BorderFactory.createEmptyBorder(20, 0, 0, 0)
         ));
 
-        // Header
+        // header
         JPanel headerPanel = new JPanel(new MigLayout("fillx", "[]push[]", ""));
         headerPanel.setOpaque(false);
 
@@ -355,8 +357,7 @@ public class EqualizerPanel extends JPanel {
             isUpdating = true;
             
             controller.loadPreset(presetName);
-            
-            // Update UI sliders
+
             updateSlidersFromController();
             
             isUpdating = false;
@@ -368,13 +369,12 @@ public class EqualizerPanel extends JPanel {
         isUpdating = true;
         
         controller.resetEqualizer();
-        
-        // Reset UI
+
         preampSlider.setValue(0);
         for (JSlider slider : bandSliders) {
             slider.setValue(0);
         }
-        presetComboBox.setSelectedIndex(0); // Select "Flat"
+        presetComboBox.setSelectedIndex(0); // autoselect "Flat"
         
         isUpdating = false;
         System.out.println(" Equalizer reset to flat");
@@ -383,7 +383,7 @@ public class EqualizerPanel extends JPanel {
     private void updatePreamp() {
         if (isUpdating) return;
         
-        float value = preampSlider.getValue() / 10.0f; // Convert to dB
+        float value = preampSlider.getValue() / 10.0f; // cv to dB
         controller.setPreamp(value);
         preampValueLabel.setText(String.format("%.1f dB", value));
     }
@@ -391,20 +391,18 @@ public class EqualizerPanel extends JPanel {
     private void updateBand(int index) {
         if (isUpdating) return;
         
-        float value = bandSliders[index].getValue() / 10.0f; // Convert to dB
+        float value = bandSliders[index].getValue() / 10.0f; // cv to dB
         controller.setBandAmplitude(index, value);
         bandValueLabels[index].setText(String.format("%.1f", value));
     }
 
     private void updateSlidersFromController() {
         isUpdating = true;
-        
-        // Update preamp
+
         float preamp = controller.getPreamp();
         preampSlider.setValue((int)(preamp * 10));
         preampValueLabel.setText(String.format("%.1f dB", preamp));
-        
-        // Update all bands
+
         float[] amplitudes = controller.getAllBandAmplitudes();
         for (int i = 0; i < 10; i++) {
             bandSliders[i].setValue((int)(amplitudes[i] * 10));

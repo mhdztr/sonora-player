@@ -87,7 +87,6 @@ public class MainFrame extends JFrame {
 
     private JPanel createSidebar() {
         JPanel sidebar = new JPanel();
-        // PERBAIKAN: Hapus 'push' dari constraint terakhir
         sidebar.setLayout(new MigLayout("fillx, insets 10", "[grow]", "[]10[]10[]10[]10[]10[]10[]10[]"));
         sidebar.setPreferredSize(new Dimension(220, 0));
         sidebar.setBackground(new Color(25, 25, 28));

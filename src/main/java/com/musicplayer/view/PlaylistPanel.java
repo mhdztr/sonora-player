@@ -22,7 +22,6 @@ public class PlaylistPanel extends JPanel {
     private JButton createPlaylistButton;
     private JButton deletePlaylistButton;
 
-    // Main content components
     private JPanel mainContent;
     private JLabel playlistNameLabel;
     private JLabel playlistInfoLabel;
@@ -50,11 +49,11 @@ public class PlaylistPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
         setBackground(new Color(18, 18, 20));
 
-        // Left sidebar - Playlists list
+        // Left sidebar
         playlistsSidebar = createPlaylistsSidebar();
         add(playlistsSidebar, BorderLayout.WEST);
 
-        // Main content - Selected playlist tracks
+        // Main content
         mainContent = createMainContent();
         add(mainContent, BorderLayout.CENTER);
     }
@@ -65,7 +64,6 @@ public class PlaylistPanel extends JPanel {
         sidebar.setBackground(new Color(25, 25, 28));
         sidebar.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(50, 50, 55)));
 
-        // Top panel - Title & Create button
         JPanel topPanel = new JPanel(new MigLayout("fillx, insets 15", "[grow][]", ""));
         topPanel.setOpaque(false);
 
@@ -88,7 +86,7 @@ public class PlaylistPanel extends JPanel {
 
         sidebar.add(topPanel, BorderLayout.NORTH);
 
-        // Center - Playlists list
+        // Playlists list
         playlistListModel = new DefaultListModel<>();
         playlistList = new JList<>(playlistListModel);
         playlistList.setBackground(new Color(25, 25, 28));
@@ -107,7 +105,7 @@ public class PlaylistPanel extends JPanel {
         scrollPane.getViewport().setBackground(new Color(25, 25, 28));
         sidebar.add(scrollPane, BorderLayout.CENTER);
 
-        // Bottom - Delete button
+        // Delete button
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
 
@@ -132,15 +130,15 @@ public class PlaylistPanel extends JPanel {
         content.setBackground(new Color(18, 18, 20));
         content.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Top panel - Playlist info & actions
+        // Playlist info & actions
         JPanel topPanel = createTopPanel();
         content.add(topPanel, BorderLayout.NORTH);
 
-        // Center - Tracks table
+        // Tracks table
         JPanel centerPanel = createTracksTable();
         content.add(centerPanel, BorderLayout.CENTER);
 
-        // Bottom - Track actions
+        // Track actions
         JPanel bottomPanel = createBottomPanel();
         content.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -227,7 +225,7 @@ public class PlaylistPanel extends JPanel {
             }
         });
 
-        // Double-click to play
+        // double-click to play
         tracksTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
@@ -291,7 +289,7 @@ public class PlaylistPanel extends JPanel {
         }
     }
 
-    // Load all playlists from database
+    // Load semua playlists from database
     private void loadPlaylists() {
         playlistListModel.clear();
         List<Playlist> playlists = controller.getAllPlaylists();
@@ -481,8 +479,6 @@ public class PlaylistPanel extends JPanel {
             boolean success = controller.removeTrackFromPlaylist(currentPlaylist.getId(), track.getId());
 
             if (success) {
-                // ========== IMMEDIATE REFRESH - UPDATED ==========
-                // Remove from UI immediately (optimistic update)
                 tracksTableModel.removeRow(selectedRow);
 
                 // Update track count in sidebar
@@ -502,7 +498,6 @@ public class PlaylistPanel extends JPanel {
                         System.out.println(" Playlist synced with database");
                     }
                 });
-                // ========== END IMMEDIATE REFRESH ==========
 
                 System.out.println(" Track removed from UI");
 
@@ -525,9 +520,8 @@ public class PlaylistPanel extends JPanel {
     }
 
     private void setupRefreshTimer() {
-        refreshTimer = new Timer(3000, e -> { // 3 seconds
-            // Only refresh if playlist count might be out of sync
-            // This is a backup for optimistic updates
+        refreshTimer = new Timer(3000, e -> {
+            // refresh if playlist count ga sinkron
             if (currentPlaylist != null) {
                 com.musicplayer.model.Playlist reloadedPlaylist = controller.getPlaylist(currentPlaylist.getId());
                 if (reloadedPlaylist != null) {
@@ -609,7 +603,7 @@ public class PlaylistPanel extends JPanel {
             System.out.println(" Track added to UI immediately");
         }
 
-        // Update sidebar count (find and update the playlist in list)
+        // Update sidebar count
         for (int i = 0; i < playlistListModel.getSize(); i++) {
             com.musicplayer.model.Playlist p = playlistListModel.getElementAt(i);
             if (p.getId() == playlistId) {
