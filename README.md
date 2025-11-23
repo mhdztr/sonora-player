@@ -17,7 +17,6 @@
 ## ✨ Features
 
 ### 🎧 **Core Playback**
-- **Multi-format Support**: MP3, WAV, FLAC, and more via VLC integration
 - **High-Quality Audio**: Powered by VLCJ for professional-grade playback
 - **Queue Management**: Create and manage playback queues effortlessly
 - **Gapless Playback**: Seamless transitions between tracks
@@ -289,10 +288,37 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 For questions, suggestions, or issues, please open an issue on GitHub.
 
 ---
-
-<div align="center">
-
 **Made with ❤️ using Java**
+
+### 👥 Creators
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Lkrhana">
+        <img src="https://github.com/Lkrhana.png" width="100px;" alt="Lkrhana"/>
+        <br />
+        <sub><b>Lkrhana</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/haikalahza">
+        <img src="https://github.com/haikalahza.png" width="100px;" alt="haikalahza"/>
+        <br />
+        <sub><b>haikalahza</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/mhdztr">
+        <img src="https://github.com/mhdztr.png" width="100px;" alt="mhdztr"/>
+        <br />
+        <sub><b>mhdztr</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+---
 
 ⭐ If you like this project, please give it a star!
 
